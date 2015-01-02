@@ -39,7 +39,7 @@ builddir="$srcdir"/build
 pkgdir="$srcdir"/pkgdir
 instldir="$srcdir"/instldir
 
-CLIENT_VERSION="$(grep -m 1 "CLIENT_VERSION" ./src/definitions/version.h | awk -F '"' '{print $2}' | awk -F '"' '{print $1}')"
+CLIENT_VERSION="$(awk -F '"' '{print $2}' ./src/make/vacuum_version | awk -F '"' '{print $1}')"
 CLIENT_VERSION_SUFIX="$(grep "CLIENT_VERSION_SUFIX" ./src/definitions/version.h | awk -F '"' '{print $2}' | awk -F '"' '{print $1}')"
 
 if [ -d "$srcdir"/.svn ]

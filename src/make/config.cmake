@@ -1,8 +1,10 @@
 set(VACUUM_LOADER_NAME vacuum)
 set(VACUUM_UTILS_NAME vacuumutils)
 
+include("${CMAKE_SOURCE_DIR}/src/make/version.cmake")
+
 if (UNIX)
-	set(VACUUM_UTILS_ABI 33)
+	set(VACUUM_UTILS_ABI "${ABI_VERSION}")
 endif (UNIX)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")

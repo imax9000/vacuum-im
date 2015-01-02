@@ -8,7 +8,7 @@ include("loader.cmake")
 
 project(loader CXX)
 
-include_directories("${CMAKE_SOURCE_DIR}/src" "${CMAKE_BINARY_DIR}/src/loader")
+include_directories("${CMAKE_BINARY_DIR}/generated" "${CMAKE_SOURCE_DIR}/src" "${CMAKE_BINARY_DIR}/src/loader")
 set(QT_USE_QTXML YES)
 set(QT_USE_QTMAIN YES)
 include(${QT_USE_FILE})

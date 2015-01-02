@@ -31,7 +31,7 @@
 
 ### Version
 REVISION="$(svnversion -c | cut -f 2 -d :)"
-VER_NUMBER="$(grep 'CLIENT_VERSION ' src/definitions/version.h | cut -f 2 -d '"')"
+VER_NUMBER="$(cat src/make/vacuum_version | cut -f 2 -d '"')"
 VERSION="${VER_NUMBER}.${REVISION}"
 
 ### Namespace

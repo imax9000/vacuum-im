@@ -8,7 +8,7 @@ add_custom_target(updatets)
 
 include("src/make/config.cmake")
 include("src/translations/languages.cmake")
-include_directories("${CMAKE_SOURCE_DIR}/src")
+include_directories("${CMAKE_BINARY_DIR}/generated" "${CMAKE_SOURCE_DIR}/src")
 
 if (APPLE)
 	file(COPY "resources/menuicons"
@@ -142,10 +142,11 @@ if (WIN32)
 endif (WIN32)
 
 if (APPLE)
+	include("${CMAKE_SOURCE_DIR}/src/make/version.cmake")
 	set_target_properties(${VACUUM_LOADER_NAME} PROPERTIES
 		MACOSX_BUNDLE_BUNDLE_NAME "vacuum"
 		MACOSX_BUNDLE_INFO_STRING "Vacuum-IM"
-		MACOSX_BUNDLE_BUNDLE_VERSION "${VERSION}"
+		MACOSX_BUNDLE_BUNDLE_VERSION "${VACUUM_VERSION}"
 		MACOSX_BUNDLE_ICON_FILE "vacuum"
 		MACOSX_BUNDLE_GUI_IDENTIFIER "com.jrudevels.vacuum"
 		MACOSX_BUNDLE_COPYRIGHT "Copyright 2010-2012, Potapov S.A.")

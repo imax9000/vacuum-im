@@ -2,8 +2,12 @@
 VACUUM_LOADER_NAME       = vacuum
 VACUUM_UTILS_NAME        = vacuumutils
 
+include(version.pri)
+
 #Library ABI version
-unix:VACUUM_UTILS_ABI    = 33
+unix:VACUUM_UTILS_ABI    = $$ABI_VERSION
+
+DEFINES += "VACUUM_VERSION=\\\"$${VACUUM_VERSION}\\\""
 
 #Build config
 CONFIG(debug, debug|release) {
