@@ -7,7 +7,7 @@
 // This is a simple function that parses command-line flags of 2 formats:
 //   --flag value
 //   --flag=value
-// After migration to Qt5 replace this with QCommandLineParser.
+// TODO: After migration to Qt5 replace this with QCommandLineParser.
 QMap<QString, QString> parseArgs(const QStringList& args) {
 	QMap<QString, QString> result;
 	for (int i = 1; i < args.size(); i++) {
