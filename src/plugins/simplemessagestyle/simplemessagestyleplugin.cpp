@@ -34,6 +34,7 @@ bool SimpleMessageStylePlugin::initConnections(IPluginManager *APluginManager, i
 {
 	Q_UNUSED(AInitOrder);
 
+	FResourcesPath = APluginManager->resourcesPath();
 	IPlugin *plugin = APluginManager->pluginInterface("IUrlProcessor").value(0);
 	if (plugin)
 	{
@@ -74,7 +75,7 @@ IMessageStyle *SimpleMessageStylePlugin::styleForOptions(const IMessageStyleOpti
 		QString stylePath = FStylePaths.value(styleId);
 		if (!stylePath.isEmpty())
 		{
-			SimpleMessageStyle *style = new SimpleMessageStyle(stylePath, FNetworkAccessManager, this);
+			SimpleMessageStyle *style = new SimpleMessageStyle(stylePath, FResourcesPath, FNetworkAccessManager, this);
 			if (style->isValid())
 			{
 				LOG_INFO(QString("Simple style created, id=%1").arg(style->styleId()));

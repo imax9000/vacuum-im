@@ -68,7 +68,8 @@
 #  define LIB_PREFIX_SIZE           3
 #endif
 
-PluginManager::PluginManager(QApplication *AParent) : QObject(AParent)
+PluginManager::PluginManager(QApplication *AParent, const QString &APluginsDir, const QString &AResourcesDir, const QString &ATranslationsDir)
+	: QObject(AParent), FPluginsDir(APluginsDir), FResourcesDir(AResourcesDir), FTranslationsDir(ATranslationsDir)
 {
 	FQuitReady = false;
 	FQuitStarted = false;
@@ -199,6 +200,10 @@ QList<QUuid> PluginManager::pluginDependencesFor(const QUuid &AUuid) const
 	return plugins;
 }
 
+QString PluginManager::resourcesPath() const {
+	return FResourcesDir;
+}
+
 void PluginManager::quit()
 {
 	if (!isShutingDown())
@@ -291,7 +296,7 @@ void PluginManager::loadSettings()
 			FDataPath = dir.absolutePath();
 	}
 	FileStorage::setResourcesDirs(FileStorage::resourcesDirs()
-		<< (QDir::isAbsolutePath(RESOURCES_DIR) ? RESOURCES_DIR : qApp->applicationDirPath()+"/"+RESOURCES_DIR)
+		<< (QDir::isAbsolutePath(FResourcesDir) ? FResourcesDir : qApp->applicationDirPath()+"/"+FResourcesDir)
 		<< FDataPath+"/resources");
 
 	QDir logDir(FDataPath);
@@ -360,11 +365,11 @@ bool PluginManager::loadPlugins()
 	LOG_INFO("Loading plugins");
 
 	QDir pluginsDir(QApplication::applicationDirPath());
-	if (pluginsDir.cd(PLUGINS_DIR))
+	if (pluginsDir.cd(FPluginsDir))
 	{
 		QString localeName = QLocale().name();
 		QDir tsDir(QApplication::applicationDirPath());
-		tsDir.cd(TRANSLATIONS_DIR);
+		tsDir.cd(FTranslationsDir);
 		loadCoreTranslations(tsDir,localeName);
 
 		QStringList files = pluginsDir.entryList(QDir::Files);

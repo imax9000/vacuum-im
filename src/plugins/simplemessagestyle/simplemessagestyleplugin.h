@@ -56,6 +56,7 @@ private:
 	QMap<QString, QString> FStylePaths;
 	QMap<QString, SimpleMessageStyle *> FStyles;
 	QNetworkAccessManager *FNetworkAccessManager;
+	QString FResourcesPath;
 };
 
 #endif // SIMPLEMESSAGESTYLEPLUGIN_H

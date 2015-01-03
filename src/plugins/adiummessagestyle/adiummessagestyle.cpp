@@ -25,7 +25,7 @@
 #define SCROLL_TIMEOUT                      100
 #define EVALUTE_TIMEOUT                     10
 
-#define SHARED_STYLE_PATH                   RESOURCES_DIR"/"RSR_STORAGE_ADIUMMESSAGESTYLES"/"FILE_STORAGE_SHARED_DIR
+#define SHARED_STYLE_PATH                   RSR_STORAGE_ADIUMMESSAGESTYLES"/"FILE_STORAGE_SHARED_DIR
 #define STYLE_CONTENTS_PATH                 "Contents"
 #define STYLE_RESOURCES_PATH                STYLE_CONTENTS_PATH"/Resources"
 
@@ -55,14 +55,14 @@ static int SenderColorsCount = sizeof(SenderColors)/sizeof(SenderColors[0]);
 
 QString AdiumMessageStyle::FSharedPath = QString::null;
 
-AdiumMessageStyle::AdiumMessageStyle(const QString &AStylePath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent) : QObject(AParent)
+AdiumMessageStyle::AdiumMessageStyle(const QString &AStylePath, const QString &AResourcesPath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent) : QObject(AParent)
 {
 	if (FSharedPath.isEmpty())
 	{
-		if (QDir::isRelativePath(SHARED_STYLE_PATH))
-			FSharedPath = qApp->applicationDirPath()+"/"SHARED_STYLE_PATH;
+		if (QDir::isRelativePath(AResourcesPath))
+			FSharedPath = qApp->applicationDirPath()+AResourcesPath+"/"SHARED_STYLE_PATH;
 		else
-			FSharedPath = SHARED_STYLE_PATH;
+			FSharedPath = AResourcesPath+"/"SHARED_STYLE_PATH;
 	}
 
 	FInfo = styleInfo(AStylePath);

@@ -34,6 +34,7 @@ bool AdiumMessageStylePlugin::initConnections(IPluginManager *APluginManager, in
 {
 	Q_UNUSED(AInitOrder);
 
+	FResourcesPath = APluginManager->resourcesPath();
 	IPlugin *plugin = APluginManager->pluginInterface("IUrlProcessor").value(0);
 	if (plugin)
 	{
@@ -74,7 +75,7 @@ IMessageStyle *AdiumMessageStylePlugin::styleForOptions(const IMessageStyleOptio
 		QString stylePath = FStylePaths.value(styleId);
 		if (!stylePath.isEmpty())
 		{
-			AdiumMessageStyle *style = new AdiumMessageStyle(stylePath, FNetworkAccessManager, this);
+			AdiumMessageStyle *style = new AdiumMessageStyle(stylePath, FResourcesPath, FNetworkAccessManager, this);
 			if (style->isValid())
 			{
 				LOG_INFO(QString("Adium style created, id=%1").arg(style->styleId()));

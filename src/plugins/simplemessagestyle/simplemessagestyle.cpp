@@ -16,7 +16,7 @@
 #include <utils/logger.h>
 
 #define SCROLL_TIMEOUT                      100
-#define SHARED_STYLE_PATH                   RESOURCES_DIR"/"RSR_STORAGE_SIMPLEMESSAGESTYLES"/"FILE_STORAGE_SHARED_DIR
+#define SHARED_STYLE_PATH                   RSR_STORAGE_SIMPLEMESSAGESTYLES"/"FILE_STORAGE_SHARED_DIR
 
 static const char *SenderColors[] =  {
 	"blue", "blueviolet", "brown", "cadetblue", "chocolate", "coral", "cornflowerblue", "crimson",
@@ -33,14 +33,14 @@ static int SenderColorsCount = sizeof(SenderColors)/sizeof(SenderColors[0]);
 
 QString SimpleMessageStyle::FSharedPath = QString::null;
 
-SimpleMessageStyle::SimpleMessageStyle(const QString &AStylePath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent) : QObject(AParent)
+SimpleMessageStyle::SimpleMessageStyle(const QString &AStylePath, const QString &AResourcesPath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent) : QObject(AParent)
 {
 	if (FSharedPath.isEmpty())
 	{
-		if (QDir::isRelativePath(SHARED_STYLE_PATH))
-			FSharedPath = qApp->applicationDirPath()+"/"SHARED_STYLE_PATH;
+		if (QDir::isRelativePath(AResourcesPath))
+			FSharedPath = qApp->applicationDirPath()+AResourcesPath+"/"SHARED_STYLE_PATH;
 		else
-			FSharedPath = SHARED_STYLE_PATH;
+			FSharedPath = AResourcesPath+"/"SHARED_STYLE_PATH;
 	}
 
 	FStylePath = AStylePath;

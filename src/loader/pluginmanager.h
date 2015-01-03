@@ -35,7 +35,7 @@ class PluginManager :
 	Q_OBJECT;
 	Q_INTERFACES(IPluginManager);
 public:
-	PluginManager(QApplication *AParent);
+	PluginManager(QApplication *AParent, const QString &APluginsDir, const QString &AResourcesDir, const QString &ATranslationsDir);
 	~PluginManager();
 	virtual QObject *instance() { return this; }
 	virtual QString version() const;
@@ -50,6 +50,7 @@ public:
 	virtual const IPluginInfo *pluginInfo(const QUuid &AUuid) const;
 	virtual QList<QUuid> pluginDependencesOn(const QUuid &AUuid) const;
 	virtual QList<QUuid> pluginDependencesFor(const QUuid &AUuid) const;
+	virtual QString resourcesPath() const;
 public slots:
 	virtual void quit();
 	virtual void restart();
@@ -105,6 +106,9 @@ private:
 	QTimer FShutdownTimer;
 private:
 	QString FDataPath;
+	QString FPluginsDir;
+	QString FResourcesDir;
+	QString FTranslationsDir;
 	QDomDocument FPluginsSetup;
 	QTranslator *FQtTranslator;
 	QTranslator *FUtilsTranslator;

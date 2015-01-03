@@ -56,6 +56,7 @@ private:
 	QMap<QString, QString> FStylePaths;
 	QMap<QString, AdiumMessageStyle *> FStyles;
 	QNetworkAccessManager *FNetworkAccessManager;
+	QString FResourcesPath;
 };
 
 #endif // ADIUMMESSAGESTYLEPLUGIN_H

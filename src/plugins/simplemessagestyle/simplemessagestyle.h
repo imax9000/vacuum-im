@@ -75,7 +75,7 @@ class SimpleMessageStyle :
 	Q_OBJECT;
 	Q_INTERFACES(IMessageStyle);
 public:
-	SimpleMessageStyle(const QString &AStylePath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent);
+	SimpleMessageStyle(const QString &AStylePath, const QString &AResourcesPath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent);
 	~SimpleMessageStyle();
 	//IMessageStyle
 	virtual QObject *instance() { return this; }

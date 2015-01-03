@@ -104,7 +104,7 @@ public:
 		QList<QString> pending;
 	};
 public:
-	AdiumMessageStyle(const QString &AStylePath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent);
+	AdiumMessageStyle(const QString &AStylePath, const QString &AResourcesPath, QNetworkAccessManager *ANetworkAccessManager, QObject *AParent);
 	~AdiumMessageStyle();
 	//IMessageStyle
 	virtual QObject *instance() { return this; }

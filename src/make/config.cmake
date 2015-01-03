@@ -37,36 +37,6 @@ elseif (WIN32)
 	set(INSTALL_SDK_DIR "sdk")
 endif (APPLE)
 
-
-set(RUN_FROM_BUILD_DIR OFF CACHE BOOL "Build executable which can be launched directly from build directory")
-
-if (RUN_FROM_BUILD_DIR)
-	set(PLUGINS_DIR "./plugins")
-	set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/resources")
-	set(TRANSLATIONS_DIR "./translations")
-elseif (WIN32)
-	set(PLUGINS_DIR "./${INSTALL_LIB_DIR}/plugins")
-	set(RESOURCES_DIR "./${INSTALL_RES_DIR}/resources")
-	set(TRANSLATIONS_DIR "./${INSTALL_RES_DIR}/translations")
-elseif (HAIKU)
-	set(PLUGINS_DIR "./${INSTALL_LIB_DIR}/plugins")
-	set(RESOURCES_DIR "./${INSTALL_RES_DIR}/resources")
-	set(TRANSLATIONS_DIR "./${INSTALL_RES_DIR}/translations")
-elseif (APPLE)
-	set(PLUGINS_DIR "../PlugIns")
-	set(RESOURCES_DIR "../${INSTALL_RES_DIR}")
-	set(TRANSLATIONS_DIR "../${INSTALL_RES_DIR}/translations")
-elseif (UNIX)
-	set(PLUGINS_DIR "../${INSTALL_LIB_DIR}/${INSTALL_APP_DIR}/plugins")
-	set(RESOURCES_DIR "../${INSTALL_RES_DIR}/${INSTALL_APP_DIR}/resources")
-	set(TRANSLATIONS_DIR "../${INSTALL_RES_DIR}/${INSTALL_APP_DIR}/translations")
-endif (RUN_FROM_BUILD_DIR)
-
-add_definitions(-DPLUGINS_DIR="${PLUGINS_DIR}")
-add_definitions(-DRESOURCES_DIR="${RESOURCES_DIR}")
-add_definitions(-DTRANSLATIONS_DIR="${TRANSLATIONS_DIR}")
-
-
 # All paths given relative to ${CMAKE_INSTALL_PREFIX}
 if (WIN32)
 	set(INSTALL_BINS "${INSTALL_APP_DIR}")
